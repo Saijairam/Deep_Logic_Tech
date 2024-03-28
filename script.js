@@ -37,17 +37,17 @@ https.get(url, (res) => {
 function extractLatestStories(htmlContent) {
     const latestStories = [];
 
-    let startIndex = htmlContent.indexOf('<li class="latest-stories__item">');
-    let endIndex;
+    let start = htmlContent.indexOf('<li class="latest-stories__item">');
+    let end;
 
     for (let i = 0; i < 6; i++) {
-        endIndex = htmlContent.indexOf('</li>', startIndex);
-        const storyHtml = htmlContent.substring(startIndex, endIndex);
+        end = htmlContent.indexOf('</li>', startIndex);
+        const storyHtml = htmlContent.substring(startIndex, end);
 
         
         const titleStartIndex = storyHtml.indexOf('>',storyHtml.indexOf('<h3'))+1
         const titleEndIndex = storyHtml.indexOf('</h3>', titleStartIndex);
-        const title = storyHtml.substring(titleStartIndex, titleEndIndex).trim();
+        const title = storyHtml.substring(titleStartIndex, titleEndIndex).trim(); //removes white space
 
         const linkStartIndex = storyHtml.indexOf('<a href="') + '<a href="'.length;
         const linkEndIndex = storyHtml.indexOf('"', linkStartIndex);
@@ -55,7 +55,7 @@ function extractLatestStories(htmlContent) {
 
         latestStories.push({ title, link });
 
-        startIndex = htmlContent.indexOf('<li class="latest-stories__item">', endIndex);
+        start = htmlContent.indexOf('<li class="latest-stories__item">', end);
     }
 
     return latestStories;
