@@ -44,7 +44,7 @@ function extractLatestStories(htmlContent) {
         endIndex = htmlContent.indexOf('</li>', startIndex);
         const storyHtml = htmlContent.substring(startIndex, endIndex);
 
-        // const titleStartIndex = storyHtml.indexOf('<h3 class="latest-stories_item-headline">') + '<h3 class="latest-stories_item-headline">'.length;
+        
         const titleStartIndex = storyHtml.indexOf('>',storyHtml.indexOf('<h3'))+1
         const titleEndIndex = storyHtml.indexOf('</h3>', titleStartIndex);
         const title = storyHtml.substring(titleStartIndex, titleEndIndex).trim();
